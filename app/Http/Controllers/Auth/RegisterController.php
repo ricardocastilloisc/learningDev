@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Student;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -68,5 +70,26 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+
+    //este metodo se inicia solo porque
+    //esta implementado en use que usamos por defecto
+    //que cre laravel
+
+    protected function registered(Request $request, $user)
+    {
+        //aqui lo que hacemos es
+        //crear un nuevo registro en la tabla que esta relacionado
+        ////el model con lo metodo ya predefinido
+        /// eso si solo cuando estamos registrando
+        ///
+        /// no se te olvide que $user ya existe como una variable
+        /// //temporal en lo qu ese crea y se hace registro
+        Student::create([
+            'user_id' =>$user->id
+        ]);
+
+        return $this->redirect('/');
     }
 }
