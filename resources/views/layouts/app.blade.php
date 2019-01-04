@@ -76,6 +76,21 @@
         </nav>
 
         <main class="py-4">
+            <!--Esta parte es saber si existe la variable-->
+            <!--el if lo que dice es que si existe esta variable hace eso-->
+            @if (session('message'))
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+
+                        <!--no se te olvide que el messange se encuentra en controlador y el controlador manda eso-->
+                        <div class="alert alert-{{session('message')[0]}}">
+                            <h4 class="alert-heading">{{__("Mensaje informativo")}}</h4>
+                            <!--Este arreglo lo predefinimos en el ogin controller y sirve para poener el mensaje-->
+                            <p>{{session('menssage')[1]}}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
             @yield('content')
         </main>
     </div>
