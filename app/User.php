@@ -2,6 +2,7 @@
 
 namespace App;
 
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -18,6 +19,27 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+
+    //por defecnto has todos esta un metodo que arranca automaticamente
+    protected static function boot ()
+    {
+        //lo procesdes hcaer
+        parent::boot();
+        //hace un crerig para evitar errores
+        //es necesario cuando los campos de un formulario o apu no estan
+        //en este caso user es el parametro que esta definido en el apu
+        static::creating(function(User $user)
+        {
+            //si es diferente y no hay
+            if( ! \App::runningInConsole())
+            {
+                //entonces donde estara el slug del la tabla
+                //le daras estas propuedades
+                //con un separador
+                $user->slug = str_slug($user->name . " " . $user->last_name, "-");
+            }
+        });
+    }
 
     /**
      * The attributes that are mass assignable.

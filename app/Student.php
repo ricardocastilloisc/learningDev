@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
+    //esto  lo que hace es seleccionar que es lo que vamos a insertar ose los cmpos que vamos a manipular
+    //deben de estar todos los datos que necestiamos
+    protected $fillable = ['user_id', 'title'];
+
     public function courses()
     {
         //un estudiante esta en varios cursos
