@@ -59,6 +59,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //esta parte lo que hace es identificar lo roles que necesitamods
+    //osea  la navegacion que tengamos dependera mucho de que role de usuario somos
+    //esta parte ya tendremos en general
+    public static function  navigation()
+    {
+        //retorname el role que tenga y de eso puede
+        //saber que tipo de navegacion tendremos
+        //con codicion
+        return auth()->check() ? auth()->user()->role->name : 'guest';
+    }
+
     public function role()
     {
         //un usuario tiene un role o un funcion pre establecida

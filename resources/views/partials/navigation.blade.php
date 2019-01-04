@@ -14,6 +14,8 @@
 
                 </ul>
                 <ul class="navbar-nav ml-auto">
+                    <!-------Esto los que hace es determinar la nevagacion del cual es rol este----------->
+                  @include('partials.navigations.' . \App\User::navigation())
                     <li class="nav-item dropdown">
                         <a
                             class="nav-link dropdown-toggle"
