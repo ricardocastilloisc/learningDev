@@ -32,7 +32,7 @@ class HomeController extends Controller
             ->where('status', Course::PUBLISHED)
             ->latest()
             ->paginate(12);
-        dd($courses);
-        return view('home');
+
+        return view('home', compact('courses'));
     }
 }
